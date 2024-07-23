@@ -18,6 +18,6 @@ const loginActivity = new mongoose.Schema ({
     }
 }, { timeStamps: true })
 
-const LoginActivity = mongoose.model('loginActivities', loginActivity)
+const LoginActivity = mongoose.model('loginActivity', loginActivity)
 
 module.exports = LoginActivity

@@ -1,25 +1,34 @@
 //require env file
 require('dotenv').config()
 
-//require packages
+//require packages and routes
 const express = require('express')
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
+const userRoutes = require('./routes/userRoutes')
+const adminRoutes = require('./routes/adminRoutes')
 
+//express app
 const app = express()
 
 //middleware
+app.use(express.json())
+
+//routes
+app.use('/api', userRoutes)
+app.use('/api', adminRoutes)
 
 //database connection
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
-        // listen to port 3000
+        // listen for requests
         app.listen(process.env.PORT, () => {
             console.log('listening on port', process.env.PORT)})
     })
     .catch((error) => {
         console.log(error)
-    })
 
-//routes
-app.get('/')
+        app.use((req, res) => {
+            res.status(500).json({ error: error.message })
+        })
+    })
