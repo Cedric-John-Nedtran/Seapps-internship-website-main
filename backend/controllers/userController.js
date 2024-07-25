@@ -5,14 +5,14 @@ const createToken = (_id) => {
     return jwt.sign({_id}, process.env.SECRET, { expiresIn: '3d' })
 }
 
-//user signup
+//user signup, redirect to employee
 const userSignup = async (req, res) => {
     //get user details
-    
     const { name, email, password } = req.body
 
     try {
         const user = await User.signup(name, email, password)
+        
         //create token
         const token = createToken(user._id)
 
@@ -43,5 +43,5 @@ const userLogin = async (req, res) => {
 
 module.exports = {
     userSignup,
-    userLogin
+    userLogin,
 }

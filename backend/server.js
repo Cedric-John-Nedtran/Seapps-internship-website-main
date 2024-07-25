@@ -7,6 +7,7 @@ const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
 const userRoutes = require('./routes/userRoutes')
 const adminRoutes = require('./routes/adminRoutes')
+const employeeRoutes = require('./routes/employeeRoutes')
 
 //express app
 const app = express()
@@ -15,8 +16,9 @@ const app = express()
 app.use(express.json())
 
 //routes
-app.use('/api', userRoutes)
-app.use('/api', adminRoutes)
+app.use('/api/user', userRoutes)
+app.use('/api/admin', adminRoutes)
+app.use('/api/employee', employeeRoutes)
 
 //database connection
 mongoose.connect(process.env.MONGO_URI)
