@@ -7,6 +7,7 @@ const requireAuth = async (req, res, next) => {
     const { authorization } = req.headers
 
     if (!authorization) {
+        res.redirect('/login') // redirect to to login page
         return res.status(400).js({ error: 'Authorization token required' })
     }
 
@@ -14,10 +15,13 @@ const requireAuth = async (req, res, next) => {
 
     try {
         const { _id } = jwt.verify(token, process.env.SECRET)
-
-        req.user = await User.findOne({ _id }).select(' _id')
+ 
+            req.user = await User.findOne({ _id }).select(' _id')
+            if ()
+        
         next()
     } catch (error) {
+        res.redirect('/signup') // redirecto signup
         res.status(401).json({ error: 'Request is not authoriazed' })
     }
 }

@@ -15,6 +15,9 @@ const app = express()
 //middleware
 app.use(express.json())
 
+// view engine
+app.set('view engine', 'ejs')
+
 //routes
 app.use('/api/user', userRoutes)
 app.use('/api/admin', adminRoutes)
